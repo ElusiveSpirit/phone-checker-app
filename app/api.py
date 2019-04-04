@@ -32,7 +32,8 @@ def phone_process_get():
     if not job:
         return jsonify(error='Job not found'), 404
 
+    status = job.get_status()
     if job.is_finished:
-        return jsonify(phone_numbers=job.result)
+        return jsonify(status=status, phone_numbers=job.result)
 
-    return jsonify(**job.meta)
+    return jsonify(status=status)
