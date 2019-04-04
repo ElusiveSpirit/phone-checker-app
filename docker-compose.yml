@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  python: &python
+    build: .
+
+  web:
+    <<: *python
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - rq
+    command: gunicorn --bind 0.0.0.0:5000 -w 4 wsgi:app
+
+  rq:
+    <<: *python
+    depends_on:
+      - redis
+    command: rq worker -u redis://redis:6379 normal
+
+  redis:
+    image: redis

@@ -11,6 +11,10 @@ pytest-mock = "*"
 beautifulsoup4 = "*"
 lxml = "*"
 requests = "*"
+pyyaml = "*"
+flask = "*"
+rq = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
